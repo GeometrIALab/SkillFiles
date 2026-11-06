@@ -1,0 +1,212 @@
+% ---------------------------------------------------------------------------
+% Paper skeleton (from the `paper-writing` skill).
+%
+% Conventions used here:
+%  * Every theorem-like environment carries a comment "% register: R<n>" on the
+%    line after \begin{...}, naming its entry in the Results register
+%    (PROJECT_SUMMARY.md). The pre-circulation check compares these with the
+%    register.
+%  * Placeholders are written <<LIKE THIS>>. Search for "<<" before circulating.
+%  * Bibliography: BibTeX with amsalpha (or amsplain). We use BibTeX rather
+%    than biblatex/biber because arXiv and most journal production systems
+%    process BibTeX directly, whereas a biblatex document usually has to ship
+%    a .bbl matching the server's package versions.
+% ---------------------------------------------------------------------------
+\documentclass[11pt]{amsart}
+
+% --- Packages ---------------------------------------------------------------
+\usepackage[utf8]{inputenc} % harmless on current engines; needed on old ones
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amssymb}
+\usepackage{mathtools}       % loads and extends amsmath
+\usepackage{graphicx}
+\usepackage[dvipsnames]{xcolor}
+% hyperref must come after almost every other package, and cleveref after
+% hyperref. Theorem environments are declared after cleveref so it knows each
+% environment's name even when environments share a counter.
+\usepackage[colorlinks=true, linkcolor=MidnightBlue, citecolor=OliveGreen,
+            urlcolor=MidnightBlue]{hyperref}
+\usepackage[capitalise,nameinlink]{cleveref}
+
+% --- Theorem environments (numbered within sections, one shared counter) ---
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+% Main results in the introduction: Theorem A, Theorem B, ...
+\newtheorem{mainthm}{Theorem}
+\renewcommand{\themainthm}{\Alph{mainthm}}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+% Use "observation" (remark style, not plain) for NUMERICAL evidence, so that
+% uncertified results never look like theorems.
+\newtheorem{observation}[theorem]{Observation}
+
+\crefname{mainthm}{Theorem}{Theorems}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{question}{Question}{Questions}
+\crefname{observation}{Observation}{Observations}
+
+\numberwithin{equation}{section}
+
+% --- Notation -----------------------------------------------------------------
+% Define every symbol once, here (or \input{macros}), and keep it consistent
+% with the notation table in PROOF_PROGRESS.md. State conventions that differ
+% between sources (signs, normalisations) in Section 2.
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\Hom}{Hom}
+% <<PROJECT-SPECIFIC MACROS>>
+
+% --- Front matter ---------------------------------------------------------------
+\title[<<SHORT TITLE>>]{<<TITLE>>}
+
+\author{<<AUTHOR NAME>>}
+\address{<<INSTITUTION AND POSTAL ADDRESS>>}
+\email{<<EMAIL>>}
+
+% \subjclass[2020]{Primary <<MSC>>; Secondary <<MSC>>}
+% \keywords{<<KEYWORDS>>}
+
+% \date{<<VERSION LABEL, e.g. Working paper v0.1, YYYY-MM-DD>>}
+
+\begin{document}
+
+\begin{abstract}
+<<Write last. State the main results at exactly their register status:
+conditional results as conditional, numerical evidence as evidence. Nothing here
+may be stronger than the body.>>
+\end{abstract}
+
+\maketitle
+
+% ===========================================================================
+\section{Introduction}\label{sec:intro}
+
+<<Context: the problem, why it matters, what was known (cite exact theorem
+numbers).>>
+
+\begin{mainthm}\label{thm:A}
+% register: R<<n>>
+% Copy the statement from PROOF_PROGRESS.md, edit for readability, then
+% compare it hypothesis by hypothesis with the original.
+<<Precise statement, all hypotheses included.>>
+\end{mainthm}
+
+% A conditional result (register status PROVED-MODULO) is stated with its
+% condition as an explicit hypothesis:
+% \begin{mainthm}\label{thm:B}
+% % register: R<<n>>
+% Assume \cref{conj:main}. Then <<...>>.
+% \end{mainthm}
+
+<<Method: the idea of the proof in a few paragraphs. What is new compared with
+existing approaches.>>
+
+\subsection*{Organisation}
+\Cref{sec:prelim} fixes notation and recalls the results we use.
+<<...>>
+
+% ===========================================================================
+\section{Preliminaries}\label{sec:prelim}
+
+\subsection{Notation and conventions}
+<<Notation table in prose. State every convention that differs between
+sources, e.g. the sign of the Laplacian or curvature, normalisations.>>
+
+\subsection{Results from the literature}
+% State cited results exactly, with theorem numbers, in the version checked.
+\begin{theorem}[{<<Author>> \cite[Theorem~<<x.y>>]{<<bibkey>>}}]\label{thm:cited}
+% register: R<<n>> (CITED)
+<<Exact statement as in the source.>>
+\end{theorem}
+
+% ===========================================================================
+\section{<<Main argument>>}\label{sec:main}
+
+\begin{lemma}\label{lem:first}
+% register: R<<n>>
+<<Statement.>>
+\end{lemma}
+
+\begin{proof}
+<<Keep every justification, including explicit hypothesis checks when
+applying cited theorems ("hypothesis (ii) of \cref{thm:cited} holds because
+...").>>
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:A}]
+<<...>>
+\end{proof}
+
+% ===========================================================================
+\section{Computations}\label{sec:computations}
+% Delete this section if there are none. For each computational claim state:
+% what was computed; the method; its certification level (CERTIFIED or
+% NUMERICAL); software and versions; where the code, data and run manifest are
+% (repository + commit, or archive DOI; run ID).
+
+\begin{proposition}[computer-assisted]\label{prop:certified}
+% register: R<<n>> (CERTIFIED)
+<<Statement.>>
+\end{proposition}
+
+\begin{proof}
+<<Describe the certificate (e.g. interval arithmetic, exact rational
+arithmetic, certified root isolation) and how to reproduce it.>>
+\end{proof}
+
+\begin{observation}\label{obs:numerical}
+% register: R<<n>> (NUMERICAL)
+<<Numerical evidence, stated as evidence: "In all <<N>> examples computed
+(<<scope>>), ...". Never "we verify".>>
+\end{observation}
+
+% Figures: generate from scripts in the repository; keep the path next to the
+% include.
+% \begin{figure}
+%   \centering
+%   % generated by: <<code/plot_xyz.py>> (run <<YYYY-MM-DD_slug>>)
+%   \includegraphics[width=0.7\textwidth]{figures/<<name>>}
+%   \caption{<<...>>}\label{fig:<<name>>}
+% \end{figure}
+
+% ===========================================================================
+\section{Further directions}\label{sec:further}
+
+\begin{conjecture}\label{conj:main}
+% register: R<<n>> (CONJECTURE)
+<<Statement, followed by a summary of the evidence, labelled by status.>>
+\end{conjecture}
+
+\begin{question}\label{q:open}
+<<Open questions, including UNRESOLVED register entries and what was tried.>>
+\end{question}
+
+% ===========================================================================
+\section*{Provenance and status of this manuscript}
+<<Specific, accurate account of AI assistance, of who checked what, and of the
+manuscript's stage (working paper / preprint / submitted / accepted). See
+references/provenance-statements.md in the paper-writing skill. Never describe
+a review that did not happen.>>
+
+\section*{Acknowledgements}
+<<Funding, people, computing resources.>>
+
+\bibliographystyle{amsalpha}
+\bibliography{refs}
+
+\end{document}

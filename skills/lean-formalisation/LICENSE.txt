@@ -1,0 +1,16 @@
+lean-formalisation: part of "Mathematical research skills for AI agents"
+Copyright (c) 2026 GeometrIA Lab, CBG
+
+Licences for the files in this folder:
+
+  SKILL.md and references/  Creative Commons Attribution 4.0 International (CC BY 4.0)
+                            https://creativecommons.org/licenses/by/4.0/legalcode
+
+Using this skill (installing it, letting an agent read it, following it in
+your own work) does not require attribution. If you share this skill or an
+adaptation of it, credit it as:
+
+  "Mathematical research skills for AI agents" by GeometrIA Lab, CBG, licensed
+  under CC BY 4.0, with a link to where you obtained it,
+
+and say whether you changed it.
